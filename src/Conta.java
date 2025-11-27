@@ -47,13 +47,15 @@ public class Conta {
             throw new IllegalArgumentException("Tipo de operação inválido: " + tipo);
     }
 
-    public String toString() {
-        // TODO(#4) REFATORAR: Esses dados não estão relacionados a conta
-        String dadosCliente = this.cliente.toString();
-
-        // TODO(#4) REFATORAR: Esses dados não estão relacinados a conta
-        String dadosConta = String.format("Ag.: %d\nConta: %d\nGerente: %s\nSaldo: %.2f",
+    // Separa responsabilidade: gerar representação dos dados da conta
+    private String gerarDadosConta() {
+        return String.format("Ag.: %d\nConta: %d\nGerente: %s\nSaldo: %.2f",
                 this.numAgencia, this.numConta, this.gerente, this.saldo);
+    }
+    
+    public String toString() {
+        String dadosCliente = this.cliente.toString();
+        String dadosConta = gerarDadosConta();
 
         // TODO(#5) REFATORAR: Essa operação não deveria estar sendo realizada neste método
         String dadosExtrato = "";

@@ -26,15 +26,25 @@ public class Conta {
         this(new Cliente(), 0, 0, null, 0);
     }
 
-    // TODO(#3) REFATORAR: Muita responsabilidade para o mesmo método
-    public void realizarOperacao(char tipo, double amount) {
-        Operacao op = new Operacao(tipo, amount);
+    private void depositar(double amount) {
+        Operacao op = new Operacao('d', amount);
         this.operacoes.add(op);
+        this.saldo += amount;
+    }
 
-        if (tipo == 'd')
-            this.saldo += amount;
-        else if(tipo == 's')
-            this.saldo -= amount;
+    private void sacar(double amount) {
+        Operacao op = new Operacao('s', amount);
+        this.operacoes.add(op);
+        this.saldo -= amount;
+    }
+
+    public void realizarOperacao(char tipo, double amount) {
+        if (tipo == 'd') 
+            depositar(amount);
+        else if (tipo == 's')
+            sacar(amount);
+        else
+            throw new IllegalArgumentException("Tipo de operação inválido: " + tipo);
     }
 
     public String toString() {

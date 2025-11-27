@@ -2,13 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Conta {
-
-    // TODO(#1) REFATORAR: Esses dados deveriam ficar em outro lugar
-    private String nomeCliente;
-    private String cpfCliente;
-    private String telefoneCliente;
-
-    // TODO(#1) REFATORAR: Esses dados deveriam ficar em outro lugar
+    private Cliente cliente;
     private int numAgencia;
     private int numConta;
     private String gerente;
@@ -18,10 +12,8 @@ public class Conta {
 
     private List<Operacao> operacoes;
 
-    public Conta(String nomeCliente, String cpfCliente, String telefoneCliente, int numAgencia, int numConta, String gerente, double valor) {
-        this.nomeCliente = nomeCliente;
-        this.cpfCliente = cpfCliente;
-        this.telefoneCliente = telefoneCliente;
+    public Conta(Cliente cliente, int numAgencia, int numConta, String gerente, double valor) {
+        this.cliente = cliente;
         this.numAgencia = numAgencia;
         this.numConta = numConta;
         this.gerente = gerente;
@@ -31,7 +23,7 @@ public class Conta {
     }
 
     public Conta() {
-        this(null, null, null, 0, 0, null, 0);
+        this(new Cliente(), 0, 0, null, 0);
     }
 
     // TODO(#3) REFATORAR: Muita responsabilidade para o mesmo método
@@ -47,8 +39,7 @@ public class Conta {
 
     public String toString() {
         // TODO(#4) REFATORAR: Esses dados não estão relacionados a conta
-        String dadosCliente = String.format("CPF: %s\nNome: %s\nTelefone: %s",
-                this.cpfCliente, this.nomeCliente, this.telefoneCliente);
+        String dadosCliente = this.cliente.toString();
 
         // TODO(#4) REFATORAR: Esses dados não estão relacinados a conta
         String dadosConta = String.format("Ag.: %d\nConta: %d\nGerente: %s\nSaldo: %.2f",

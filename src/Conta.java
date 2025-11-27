@@ -27,13 +27,13 @@ public class Conta {
     }
 
     private void depositar(double amount) {
-        Operacao op = new Operacao('d', amount);
+        Operacao op = Operacao.fromChar('d', amount);
         this.operacoes.add(op);
         this.saldo += amount;
     }
-
+ 
     private void sacar(double amount) {
-        Operacao op = new Operacao('s', amount);
+        Operacao op = Operacao.fromChar('s', amount);
         this.operacoes.add(op);
         this.saldo -= amount;
     }

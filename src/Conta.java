@@ -3,21 +3,21 @@ import java.util.List;
 
 public class Conta {
     private Cliente cliente;
+    
     private int numAgencia;
     private int numConta;
     private String gerente;
 
-    // TODO(#2) REFATORAR: Esse nome não é o ideal para representar o saldo da conta
-    private double valor;
+    private double saldo;
 
     private List<Operacao> operacoes;
 
-    public Conta(Cliente cliente, int numAgencia, int numConta, String gerente, double valor) {
+    public Conta(Cliente cliente, int numAgencia, int numConta, String gerente, double saldo) {
         this.cliente = cliente;
         this.numAgencia = numAgencia;
         this.numConta = numConta;
         this.gerente = gerente;
-        this.valor = valor;
+        this.saldo = saldo;
 
         this.operacoes = new ArrayList<>();
     }
@@ -27,14 +27,14 @@ public class Conta {
     }
 
     // TODO(#3) REFATORAR: Muita responsabilidade para o mesmo método
-    public void realizarOperacao(char tipo, int valor) {
-        Operacao op = new Operacao(tipo, valor);
+    public void realizarOperacao(char tipo, double amount) {
+        Operacao op = new Operacao(tipo, amount);
         this.operacoes.add(op);
 
         if (tipo == 'd')
-            this.valor += valor;
+            this.saldo += amount;
         else if(tipo == 's')
-            this.valor -= valor;
+            this.saldo -= amount;
     }
 
     public String toString() {
@@ -43,7 +43,7 @@ public class Conta {
 
         // TODO(#4) REFATORAR: Esses dados não estão relacinados a conta
         String dadosConta = String.format("Ag.: %d\nConta: %d\nGerente: %s\nSaldo: %.2f",
-                this.numAgencia, this.numConta, this.gerente, this.valor);
+                this.numAgencia, this.numConta, this.gerente, this.saldo);
 
         // TODO(#5) REFATORAR: Essa operação não deveria estar sendo realizada neste método
         String dadosExtrato = "";
